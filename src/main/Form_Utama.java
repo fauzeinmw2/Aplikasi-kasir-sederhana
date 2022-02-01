@@ -422,22 +422,29 @@ public class Form_Utama extends javax.swing.JFrame {
                 btnTambah.setEnabled(true);
             
             }catch(Exception e){
+                System.out.println(e);
             } 
         }
         
     }//GEN-LAST:event_btnCetakActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
- 
-        DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
-        int jmlHargaBarang = Integer.parseInt(txtHarga.getText()) * Integer.parseInt(txtJmlBeli.getText());
-        model.addRow(new Object[] {cbNmBarang.getSelectedItem(), txtHarga.getText(), txtJmlBeli.getText(), jmlHargaBarang});
         
-       hitungTotalHarga();
+        if(cbNmBarang.getSelectedItem().equals("-- Pilih Barang --")){
+            JOptionPane.showMessageDialog(rootPane, "Pilih Barang terlebih dahulu!!!");
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
+            int jmlHargaBarang = Integer.parseInt(txtHarga.getText()) * Integer.parseInt(txtJmlBeli.getText());
+            model.addRow(new Object[] {cbNmBarang.getSelectedItem(), txtHarga.getText(), txtJmlBeli.getText(), jmlHargaBarang});
+
+            hitungTotalHarga();
+
+            txtHarga.setText("");
+            txtJmlBeli.setText("");
+            cbNmBarang.setSelectedIndex(0);
+        }
         
-        txtHarga.setText("");
-        txtJmlBeli.setText("");
-        cbNmBarang.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void tblKeranjangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKeranjangMouseClicked
